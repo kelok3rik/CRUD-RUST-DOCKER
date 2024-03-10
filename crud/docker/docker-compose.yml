@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=p1180759
+      - POSTGRES_PASSWORD=erikcruz
+      - POSTGRES_DB=info_db
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+       PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+       PGADMIN_DEFAULT_PASSWORD: admin
+       PGADMIN_CONFIG_WTF_CSRF_CHECK_DEFAULT: 'False'
+       PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+
+  rust_app:
+    image: crud:latest
+    ports:
+      - "6001:6001"
+    environment:
+     - DATABASE_URL=postgresql://p1180759:erikcruz@postgres:5432/info_db
+    depends_on:
+      - postgres

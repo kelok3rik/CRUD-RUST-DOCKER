@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  rustapp:
+    container_name: rustapp
+    image: kelok3rik/rustapp:1.0.0
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: "postgres://postgres:password@db:5432/postgres"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:   # Volumes debe ser una lista
+      - pgdata:/var/lib/postgresql/data   # Agregar aquí los volúmenes necesarios para el servicio
+
+  db:
+    container_name: db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: rustapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}

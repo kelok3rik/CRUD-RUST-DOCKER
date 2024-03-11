@@ -68,4 +68,20 @@ impl UserService {
             .await?;
         Ok(())
     }
- }
+
+    pub async fn create_table(&self) -> Result<(), Error> {
+        let query = "CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255),
+            occupation VARCHAR(255),
+            email VARCHAR(255),
+            phone VARCHAR(255)
+        )";
+
+        sqlx::query(query)
+            .execute(&self.pool)
+            .await?;
+
+        Ok(())
+    }
+}

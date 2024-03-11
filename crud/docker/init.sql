@@ -1,11 +1,6 @@
 
-\c info_db;
 
-
- -- CREATE USER p1180759 WITH PASSWORD 'erikcruz';
-
-
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users2 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     occupation VARCHAR(255),

@@ -20,6 +20,9 @@ async fn main() {
 
     let service = UserService::new().await.unwrap();
 
+    // Crear la tabla en la base de datos
+    service.create_table().await.unwrap();
+
     let app = Router::new().
         route("/users", get(list_users)).
         route("/user/:id", get(get_user_by_id)).

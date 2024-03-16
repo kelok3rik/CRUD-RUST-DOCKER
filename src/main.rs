@@ -29,7 +29,7 @@ async fn main() {
         .layer(Extension(service));
 
     let listener =
-        tokio::net::TcpListener::bind("0.0.0.0:3000").
+        tokio::net::TcpListener::bind("0.0.0.0:6001").
             await.unwrap();
 
     println!("Listening....!");

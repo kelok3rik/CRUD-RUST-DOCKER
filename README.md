@@ -25,3 +25,6 @@ Este proyecto demuestra cómo implementar operaciones CRUD (Crear, Leer, Actuali
 1. **Construir la imagen de Docker**:
    ```bash
    docker build . -t crud:latest
+   cd docker
+   docker compose up
+
